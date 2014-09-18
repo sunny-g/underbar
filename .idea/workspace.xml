@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="543b1111-eda0-4929-91ca-5c3048a22d99" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/underbar.js" afterPath="$PROJECT_DIR$/src/underbar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="underbar.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,7 +31,7 @@
           <file leaf-file-name="underbarSpec.js" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/spec/underbarSpec.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.17230769" vertical-offset="112" max-vertical-offset="10422">
+                <state vertical-scroll-proportion="-2.283077" vertical-offset="1484" max-vertical-offset="10422">
                   <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
                 </state>
@@ -44,8 +45,8 @@
           <file leaf-file-name="underbar.js" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/underbar.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.51692307" vertical-offset="252" max-vertical-offset="5004">
-                  <caret line="42" column="60" selection-start-line="42" selection-start-column="60" selection-end-line="42" selection-end-column="60" />
+                <state vertical-scroll-proportion="0.8830769" vertical-offset="1134" max-vertical-offset="5438">
+                  <caret line="122" column="26" selection-start-line="122" selection-start-column="26" selection-end-line="122" selection-end-column="26" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                   </folding>
@@ -274,7 +275,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/spec/underbarSpec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.17230769" vertical-offset="112" max-vertical-offset="10422">
+        <state vertical-scroll-proportion="-2.283077" vertical-offset="1484" max-vertical-offset="10422">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -282,8 +283,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/underbar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51692307" vertical-offset="252" max-vertical-offset="5004">
-          <caret line="42" column="60" selection-start-line="42" selection-start-column="60" selection-end-line="42" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.8830769" vertical-offset="1134" max-vertical-offset="5438">
+          <caret line="122" column="26" selection-start-line="122" selection-start-column="26" selection-end-line="122" selection-end-column="26" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
