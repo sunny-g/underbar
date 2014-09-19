@@ -133,19 +133,11 @@ var _ = {};
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
 
-	  //TODO: MAKE THIS WORK ON COLLECTIONS, NOT JUST ARRAYS
-
 	  var ans = [];
 
-	  if (Array.isArray(collection)) {
-		  for (var i = 0; i < collection.length; i++) {
-			  ans.push(iterator(collection[i]));
-		  }
-	  } else {
-		  for (var k in collection) {
-			  ans.push(iterator(collection[i], k));
-		  }
-	  }
+	  _.each(collection, function(element, key) {
+		  ans.push(iterator(element, key));
+	  });
 		return ans;
   };
 
@@ -171,19 +163,15 @@ var _ = {};
   // Note: you will nead to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
 
-	  //TODO: MAKE THIS WORK ON COLLECTIONS, NOT JUST ARRAYS
-
 	  var ans = [];
-	  if (typeof(functionOrKey) == 'function') {
-		  _.each(collection, function (e) {
+	  _.each(collection, function (e) {
+		  if (typeof(functionOrKey) === 'function') {
 			  ans.push(functionOrKey.apply(e, args));
-		  });
-	  } else {
-		  _.each(collection, function(e) {
+		  } else if (typeof(functionOrKey === 'string')) {
 			  ans.push(e[functionOrKey]());
-		  })
-	  }
-	  return ans;
+		  }
+		});
+		return ans;
   };
 
   // Reduces an array or object to a single value by repetitively calling
@@ -200,6 +188,13 @@ var _ = {};
   //     return total + number;
   //   }, 0); // should be 6
   _.reduce = function(collection, iterator, accumulator) {
+	  _.each(collection, function(elem, key, obj) {
+		  if (accumulator === undefined) {
+			  accumulator = 1;
+		  }
+		  accumulator = iterator(accumulator, elem);
+		});
+	  return accumulator;
   };
 
   // Determine if the array or object contains a given value (using `===`).
