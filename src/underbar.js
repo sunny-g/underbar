@@ -84,33 +84,28 @@ var _ = {};
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
 
-	  //TODO: MAKE THIS WORK ON COLLECTIONS, NOT JUST ARRAYS
-
 	  var ans = [];
-	  for (var i = 0; i < collection.length; i++) {
-		  if (test(collection[i])) {
-			  ans.push(collection[i])
+    _.each(collection, function(elem){
+		  if (test(elem)) {
+			  ans.push(elem);
 		  }
-	  }
+	  });
 	  return ans;
   };
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
-
-	  //TODO: MAKE THIS WORK ON COLLECTIONS, NOT JUST ARRAYS
-
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
 
-	  var ans = [],
-	      filtered = _.filter(collection, test);
+	  var ans = [];
+	  var filtered = _.filter(collection, test);
 
-	  for (var i = 0; i < collection.length; i++) {
-		  if (filtered.indexOf(collection[i]) === -1) {
-			  ans.push(collection[i]);
+    _.each(collection, function(elem) {
+		  if (filtered.indexOf(elem) === -1) {
+			  ans.push(elem);
 		  }
-	  }
+	  });
 	  return ans;
 
   };
@@ -118,11 +113,11 @@ var _ = {};
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
 	  var ans = [];
-	  for (var i = 0; i < array.length; i++) {
-			if ( ans.indexOf(array[i]) === -1 ) {
-				ans.push(array[i]);
+    _.each(array, function(elem) {
+			if ( ans.indexOf(elem) === -1 ) {
+				ans.push(elem);
 			}
-	  }
+	  });
 	  return ans;
   };
 
@@ -188,7 +183,7 @@ var _ = {};
   //     return total + number;
   //   }, 0); // should be 6
   _.reduce = function(collection, iterator, accumulator) {
-	  _.each(collection, function(elem, key, obj) {
+	  _.each(collection, function(elem) {
 		  if (accumulator === undefined) {
 			  accumulator = 1;
 		  }
@@ -213,6 +208,14 @@ var _ = {};
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+
+	  return _.reduce(collection, function(accumulator, elem) {
+      if (iterator) {
+        return accumulator && !!iterator(elem);
+      } else {
+        return accumulator && !!elem;
+      }
+	  }, true );
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
