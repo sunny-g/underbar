@@ -318,7 +318,13 @@ var _ = {};
   _.memoize = function(func) {
     var res = {};
 
+    return function() {
+      if (!(arguments[0] in res)) {
+        res[arguments[0]] = func(arguments[0]);
+      }
+      return res[arguments[0]];
 
+    };
 
   };
 
