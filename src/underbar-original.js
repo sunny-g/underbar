@@ -84,14 +84,13 @@ var _ = {};
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
 
-    var res = [];
-    _.each(collection, function(item){
-      if (test(item)) {
-        res.push(item);
-      }
-    });
-    return res;
-
+	  var ans = [];
+    _.each(collection, function(elem){
+		  if (test(elem)) {
+			  ans.push(elem);
+		  }
+	  });
+	  return ans;
   };
 
   // Return all elements of an array that don't pass a truth test.
@@ -139,9 +138,17 @@ var _ = {};
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
 
+    /*
+	  var ans = [];
+	  _.each(collection, function(element, key) {
+		  ans.push(iterator(element, key));
+	  });
+		return ans;
+    */
+    
     var res = [];
-    _.each(collection, function(item) {
-      res.push(iterator(item));
+    _.each(collection, function(elem, key) {
+      res.push(iterator(elem, key, collection));
     });
     return res;
   };
@@ -193,14 +200,13 @@ var _ = {};
   //     return total + number;
   //   }, 0); // should be 6
   _.reduce = function(collection, iterator, accumulator) {
-
-    accumulator = accumulator == undefined ? collection[0] : accumulator;
-    _.each(collection, function(item) {
-      accumulator = iterator(accumulator, item);
-    });
-
-    return accumulator;
-
+	  _.each(collection, function(elem) {
+		  if (accumulator === undefined) {
+			  accumulator = 1;
+		  }
+		  accumulator = iterator(accumulator, elem);
+		});
+	  return accumulator;
   };
 
   // Determine if the array or object contains a given value (using `===`).
@@ -220,39 +226,28 @@ var _ = {};
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
 
-    return _.reduce(collection, function(accumulator, current) {
+	  return _.reduce(collection, function(accumulator, elem) {
       if (iterator) {
-        return !!accumulator && !!iterator(current);
+        return accumulator && !!iterator(elem);
       } else {
-        return !!accumulator && !!current;
+        return accumulator && !!elem;
       }
-    }, true);
-
+	  }, true );
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
+    /* simple, non-clever implementation */
+    return _.reduce(collection, function(accumulator, elem) {
+      if (iterator) {
+        return accumulator || !!iterator(elem);
+      } else {
+        return accumulator || !!elem;
+      }
+    }, false);
+
     // TODO: There's a very clever way to re-use every() here.
-
-    if (!iterator) {
-      iterator = _.identity;
-    }
-
-    var res = _.every(collection, function(elem) {
-      return !iterator(elem);
-      /*
-      originally, every elem had to pass the test for every to return true
-        since we're passing the opposite of the iterator,
-          only one elem has to pass the iterator (ie, return false to every)
-          for res to equal false
-
-      if some/every elem passes the iterator, res == false
-      if every elem fails the iterator, res == true
-      */
-    });
-
-    return !res
 
   };
 
@@ -276,7 +271,16 @@ var _ = {};
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
-
+    /*
+    var args = Array.prototype.slice.call(arguments, 1, arguments.length);
+    _.each(args, function(inputObj) {
+      for (var key in inputObj) {
+        obj[key] = inputObj[key];
+      }
+    });
+    return obj;
+    */
+    
     var args = Array.prototype.slice.call(arguments, 1, arguments.length);
     
     _.each(args, function(arg) {
@@ -413,9 +417,6 @@ var _ = {};
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
-
-
-
   };
 
   // Zip together two or more arrays with elements of the same index
@@ -424,21 +425,6 @@ var _ = {};
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
-    var args = Array.prototype.slice.call(arguments);
-
-    var res = [];
-    var longestLen = args[0].length;
-    // create a newArr
-    // for each argArr, push its ith val to newArr
-    _.each(args[0], function(elem, index) {
-      var arr = [];
-      _.each(args, function(array) {
-        arr.push(array[index]);
-      })
-      res.push(arr);
-    });
-
-    return res;
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
@@ -451,19 +437,11 @@ var _ = {};
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
-
   };
 
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
-    var args = Array.prototype.slice.call(arguments, 1, arguments.length);
-
-    var res = [];
-    _.each(array, function(elem) {
-
-    });
-
   };
 
 
