@@ -675,12 +675,12 @@ describe("throttle", function() {
     var saveResult = function() {
       results.push(throttledIncr());
     };
-    saveResult();
-    saveResult();
-    setTimeout(saveResult, 32);
-    setTimeout(saveResult, 80);
-    setTimeout(saveResult, 96);
-    setTimeout(saveResult, 144);
+    saveResult();                 // 0, == 1
+    saveResult();                 // 1, == 1
+    setTimeout(saveResult, 32);   // 2, == 1
+    setTimeout(saveResult, 80);   // 3, == 2?
+    setTimeout(saveResult, 96);   // 4
+    setTimeout(saveResult, 144);  // 5
     setTimeout(function() {
       expect(results[0]).to.eql(1);
       expect(results[1]).to.eql(1);

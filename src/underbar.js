@@ -427,14 +427,12 @@ var _ = {};
     var args = Array.prototype.slice.call(arguments);
 
     var res = [];
-    var longestLen = args[0].length;
-    // create a newArr
-    // for each argArr, push its ith val to newArr
+
     _.each(args[0], function(elem, index) {
       var arr = [];
       _.each(args, function(array) {
         arr.push(array[index]);
-      })
+      });
       res.push(arr);
     });
 
@@ -446,6 +444,18 @@ var _ = {};
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+
+    result = result || [];
+    _.each(nestedArray, function(elem) {
+      if (Array.isArray(elem)) {
+        _.flatten(elem, result);
+      } else {
+        result.push(elem);
+      }
+    });
+
+    return result;
+
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
@@ -477,6 +487,52 @@ var _ = {};
   //
   // See the Underbar readme for details.
   _.throttle = function(func, wait) {
+
+    /*
+      first, it must return a func
+        that func can run once
+        then, if called again, it can't run until a timeout has run out
+
+      so, check if timeout has expired
+        if not, returns it's previous value, then call it again after the timeout
+        if expired, run again
+     */
+    var called = false;
+    var res;
+    var args = Array.prototype.slice.call(arguments, 2, arguments.length);
+    // trigger is the next time we should trigger the func
+    // var trigger;
+
+    return function() {
+
+      if (!called) {
+        // if haven't called it already... (called is false)
+          // call the func, store the res
+          // set `called` to true
+          // change `called` to false after timeout
+
+        console.log('calling normally...');
+
+        res = func.apply(this, args);
+        called = true;
+
+        setTimeout(function() {
+          called = false;
+        }, wait)
+      } else {
+        // if we have called it recently...
+          // `called` should already be true
+          // call the func as soon as the timeout has finished
+
+        setTimeout(function () {
+          console.log('calling w/in timeout period...');
+          res = func.apply(this, args);
+        }, wait);
+      }
+
+      return res;
+    };
+
   };
 
 }).call(this);
