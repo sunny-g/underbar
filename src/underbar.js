@@ -152,7 +152,7 @@ var _ = {};
    * as an example of this.
    */
 
-  // Takes an array of objects and returns and array of the values of
+  // Takes an array of objects and returns an array of the values of
   // a certain property in it. E.g. take an array of people and return
   // an array of just their ages
   _.pluck = function(collection, key) {
@@ -469,9 +469,15 @@ var _ = {};
   _.difference = function(array) {
     var args = Array.prototype.slice.call(arguments, 1, arguments.length);
 
-    var res = [];
-    _.each(array, function(elem) {
-
+    // reject an elem if it is in one of the other arrays
+    // ergo, our test needs to:
+      // test if any argArray contains our current elem
+    return _.reject(array, function(elem) {
+      var contains = false;
+      _.each(args, function(argArray) {
+        contains = contains || _.contains(argArray, elem);
+      });
+      return contains;
     });
 
   };
